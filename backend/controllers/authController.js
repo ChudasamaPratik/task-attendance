@@ -97,3 +97,21 @@ exports.login = async (req, res) => {
         });
     }
 };
+
+
+
+// List all users - This route will be protected
+exports.listUsers = async (req, res) => {
+    try {
+        const users = await User.find({}, "username email createdAt ");
+
+        res.json({
+            success: true,
+            message: "Listing users",
+            users
+        });
+    } catch (error) {
+        console.error("Error fetching users:", error);
+        res.status(500).json({ success: false, error: "Error fetching users" });
+    }
+};
