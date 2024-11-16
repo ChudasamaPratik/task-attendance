@@ -1,7 +1,6 @@
 const express = require('express');
-const { login, register } = require("../controllers/authController");
-const { validateLogin, validateRegister } = require('../validators/authValidator');
-
+const { login, register, listUsers } = require("../controllers/authController");
+const auth = require("../middleware/auth");
 
 
 const router = express.Router();
@@ -9,6 +8,6 @@ const router = express.Router();
 
 router.post('/register', register);
 router.post('/login', login);
-
+router.get('/users', auth, listUsers);
 
 module.exports = router;
